@@ -1,7 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './project.css';
-// import { AuthProvider, useAuth} from './context/AuthContext.jsx';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import Counter from './context/Counter.jsx'

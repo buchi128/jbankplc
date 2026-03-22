@@ -8,13 +8,13 @@ import ThreeButton from "../components/ThreeButtons";
   const Home = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+ useEffect(() => {
+  const token = localStorage.getItem("token");
 
-    if (!token) {
-      navigate("/login");
-    }
-  }, [navigate]);
+  if (token) {
+    navigate("/dashboard");
+  }
+}, [navigate]);
 
   return (
     <>
