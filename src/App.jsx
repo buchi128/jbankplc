@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
-import Loginform from "./pages/loginForm";
+import Loginform from "./pages/LoginForm";
 import AdminLogin from "./pages/AdminLogin"
 import Openaccount from "./pages/Openaccount";
 import RegisterAdmin from "./pages/RegisterAdmin"
