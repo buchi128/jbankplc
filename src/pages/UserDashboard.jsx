@@ -52,15 +52,16 @@ export default function UserDashboard() {
 
   }, [fetchUserAccounts]);
 
-  const logout = () => {
-    localStorage.clear();
-    navigate("/login", { replace: true });
+  // const logout = () => {
+  //   localStorage.clear();
+  //   navigate("/login", { replace: true }); 
 
-    function Sidebar({ accounts, logout }) {
+  // };
+ function Sidebar({ accounts, logout }) {
+  localStorage.clear();
+    navigate("/login", { replace: true }); 
+
   const location = useLocation();
-
-  };
-
   return (
 
     // <div className="container-fluid">
@@ -347,13 +348,12 @@ export default function UserDashboard() {
           >
             🚪 Logout
           </button>
+          <Outlet />
         </div>
 
       </div>
     </nav>
   );
 }
-
-
 }
-//export default Sidebar;
+// export default Sidebar;
