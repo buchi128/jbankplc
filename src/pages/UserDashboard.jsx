@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
+import { Link, Outlet, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Deposit from "../components/transactions/DepositForm";
 import Withdraw from "../components/transactions/WithdrawForm";
@@ -52,308 +52,227 @@ export default function UserDashboard() {
 
   }, [fetchUserAccounts]);
 
-  // const logout = () => {
-  //   localStorage.clear();
-  //   navigate("/login", { replace: true }); 
-
-  // };
- function Sidebar({ accounts, logout }) {
-  localStorage.clear();
+  const logout = () => {
+    localStorage.clear();
     navigate("/login", { replace: true }); 
 
-  const location = useLocation();
+  };
+
   return (
 
-    // <div className="container-fluid">
-    //   <div className="row">
+    <div className="container-fluid">
+      <div className="row">
 
-    //     {/* SIDEBAR */}
+        {/* SIDEBAR */}
 
-    //     <nav className="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+        <nav className="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
 
-    //       <div className="position-sticky pt-3 text-white">
+          <div className="position-sticky pt-3 text-white">
 
-    //         <h5 className="text-center mb-4">Profile</h5>
+            <h5 className="text-center mb-4">Profile</h5>
 
-    //         <ul className="nav flex-column">
+            <ul className="nav flex-column">
 
-    //           <li className="nav-item">
-    //             <Link className="nav-link text-white" to="#">
-    //               <i className="bi bi-speedometer2 me-2"></i>
-    //               Dashboard
-    //             </Link>
-    //           </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="#">
+                  <i className="bi bi-speedometer2 me-2"></i>
+                  Dashboard
+                </Link>
+              </li>
 
-    //           <li className="nav-item">
-    //             <Link className="nav-link text-white" to="#accounts">
-    //               Accounts
-    //             </Link>
-    //             {accounts.map((acc) => (
-    //               <div key={acc._id} className="card p-3 mb-2 text-light">
-    //                 <h6>Account Number</h6>
-    //                 <p>{acc.accountNumber}</p>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="#accounts">
+                  Accounts
+                </Link>
+                {accounts.map((acc) => (
+                  <div key={acc._id} className="card p-3 mb-2 text-light">
+                    <h6>Account Number</h6>
+                    <p>{acc.accountNumber}</p>
 
-    //                 <h6 style={{ color: "white" }}>Balance</h6>
-    //                 <p>₦{Number(acc.balance).toLocaleString()}</p>
-    //               </div>
-    //             ))}
-    //           </li>
+                    <h6 style={{ color: "white" }}>Balance</h6>
+                    <p>₦{Number(acc.balance).toLocaleString()}</p>
+                  </div>
+                ))}
+              </li>
 
-    //           <li className="nav-item">
-    //             <Link className="nav-link text-white" to="#transactions">
-    //               Transactions
-    //             </Link>
-    //             {transactions.map((tx) => (
-    //               <tr key={tx._id}>
-    //                 <td>{tx.type}</td>
-    //                 <td>₦{Number(tx.amount).toLocaleString()}</td>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="#transactions">
+                  Transactions
+                </Link>
+                {transactions.map((tx) => (
+                  <tr key={tx._id}>
+                    <td>{tx.type}</td>
+                    <td>₦{Number(tx.amount).toLocaleString()}</td>
 
-    //                 <td>
-    //                   {tx.type === "transfer"
-    //                     ? `To: ${tx.targetAccountId?.accountNumber}`
-    //                     : tx.accountId?.accountNumber}
-    //                 </td>
+                    <td>
+                      {tx.type === "transfer"
+                        ? `To: ${tx.targetAccountId?.accountNumber}`
+                        : tx.accountId?.accountNumber}
+                    </td>
 
-    //                 <td>{new Date(tx.createdAt).toLocaleString()}</td>
-    //               </tr>
-    //             ))}
-    //           </li>
+                    <td>{new Date(tx.createdAt).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </li>
 
-    //           <li className="nav-item">
-    //             <Link className="nav-link text-white" to="#transfer">
-    //               Transfer
-    //             </Link>
-    //           </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="#transfer">
+                  Transfer
+                </Link>
+              </li>
 
-    //           <li className="nav-item mt-4">
-    //             <button
-    //               className="btn btn-outline-light w-100"
-    //               onClick={logout} id="logoutbtn"
-    //             >
-    //               Logout
-    //             </button>
-    //           </li>
+              <li className="nav-item mt-4">
+                <button
+                  className="btn btn-outline-light w-100"
+                  onClick={logout} id="logoutbtn"
+                >
+                  Logout
+                </button>
+              </li>
 
-    //         </ul>
+            </ul>
 
-    //       </div>
+          </div>
 
-    //     </nav>
+        </nav>
 
-    //     {/* MAIN*/}
+        {/* MAIN*/}
 
-    //     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-light min-vh-100">
+        <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-light min-vh-100">
 
-    //       {/* TOPBAR */}
+          {/* TOPBAR */}
 
-    //       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
 
-    //         <button
-    //           className="btn btn-primary"
-    //           onClick={fetchUserAccounts}
-    //         >
-    //           Refresh
-    //         </button>
-
-    //       </div>
-
-    //       {error && (
-    //         <div className="alert alert-danger">{error}</div>
-    //       )}
-
-    //       {/* ACCOUNTS */}
-
-    //       <div id="accounts" className="mb-5">
-
-
-    //         <div className="row">
-
-    //           {/* {accounts.map((acc) => ( */}
-    //           {Array.isArray(accounts) && accounts.map((acc) => (
-    //             <div className="col-12 col-md-6 col-lg-4" key={acc._id}>
-
-    //               <div className="card shadow-sm mb-3">
-
-    //                 <div className="card-body">
-
-    //                   <h6 className="text-muted">
-    //                     Account Number
-    //                   </h6>
-
-    //                   <h5>{acc.accountNumber}</h5>
-
-    //                   <p className="mt-2">
-    //                     Balance
-    //                   </p>
-
-    //                   <h4 className="text-success">
-    //                     ₦{Number(acc.balance).toLocaleString()}
-    //                   </h4>
-
-    //                 </div>
-
-    //               </div>
-
-    //             </div>
-
-    //           ))}
-
-    //         </div>
-
-    //       </div>
-
-    //       {/* TRANSFER */}
-
-    //       <div id="transfer" className="mb-5">
-
-    //         <div>
-    //           <TransferForm accountId={accounts[0]?._id} refresh={fetchUserAccounts} />
-    //         </div>
-
-    //       </div>
-
-    //       {/* DEPOSIT */}
-
-    //       <div className="mb-5">
-
-    //         <Deposit onSuccess={fetchUserAccounts} />
-
-    //       </div>
-
-    //       {/* WITHDRAW */}
-
-    //       <div className="mb-5">
-
-    //         <Withdraw onSuccess={fetchUserAccounts} />
-
-    //       </div>
-
-    //       {/* TRANSACTIONS */}
-
-    //       <h5>Transaction History</h5>
-    //       <table className="table table-responsive bg-white p-3 shadow-sm rounded" id="transactions">
-
-    //         <thead>
-    //           <tr>
-    //             <th>Type</th>
-    //             <th>Amount</th>
-    //             <th>Account</th>
-    //             <th>Date</th>
-    //           </tr>
-    //         </thead>
-
-    //         <tbody>
-
-    //           {
-    //             Array.isArray(transactions) && transactions.map((t) => (
-    //               <tr key={t._id}>
-
-    //                 <td>{t.type}</td>
-
-    //                 <td>₦{Number(t.amount).toLocaleString()}</td>
-
-    //                 <td>
-    //                   {t.type === "transfer"
-    //                     ? `To: ${t.targetAccountId?.accountNumber}`
-    //                     : t.accountId?.accountNumber || "-"}
-    //                 </td>
-
-    //                 <td>{new Date(t.createdAt).toLocaleString()}</td>
-
-    //               </tr>
-
-    //             ))
-    //           }
-
-    //         </tbody>
-
-    //       </table>
-
-    //       <Outlet />
-
-    //     </main>
-
-    //   </div>
-    // </div>
-
-
-    <nav className="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
-      <div className="position-sticky pt-3 text-white">
-
-        {/* PROFILE */}
-        <div className="text-center mb-4">
-          <h5>👤 My Profile</h5>
-          <small>Welcome back</small>
-        </div>
-
-        {/* NAV LINKS */}
-        <ul className="nav flex-column px-2">
-
-          <li className="nav-item">
-            <Link
-              className={`nav-link text-white ${location.hash === "#dashboard" ? "active" : ""}`}
-              to="#dashboard"
+            <button
+              className="btn btn-primary"
+              onClick={fetchUserAccounts}
             >
-              📊 Dashboard
-            </Link>
-          </li>
+              Refresh
+            </button>
 
-          <li className="nav-item">
-            <Link
-              className={`nav-link text-white ${location.hash === "#accounts" ? "active" : ""}`}
-              to="#accounts"
-            >
-              💳 Accounts
-            </Link>
-          </li>
+          </div>
 
-          <li className="nav-item">
-            <Link
-              className={`nav-link text-white ${location.hash === "#transactions" ? "active" : ""}`}
-              to="#transactions"
-            >
-              📜 Transactions
-            </Link>
-          </li>
+          {error && (
+            <div className="alert alert-danger">{error}</div>
+          )}
 
-          <li className="nav-item">
-            <Link
-              className={`nav-link text-white ${location.hash === "#transfer" ? "active" : ""}`}
-              to="#transfer"
-            >
-              💸 Transfer
-            </Link>
-          </li>
+          {/* ACCOUNTS */}
 
-        </ul>
+          <div id="accounts" className="mb-5">
 
-        {/* QUICK ACCOUNT SUMMARY */}
-        <div className="mt-4 px-2">
-          <h6>Accounts</h6>
 
-          {accounts?.slice(0, 2).map((acc) => (
-            <div key={acc._id} className="bg-secondary p-2 rounded mb-2">
-              <small>{acc.accountNumber}</small>
-              <div>₦{Number(acc.balance).toLocaleString()}</div>
+            <div className="row">
+
+              {/* {accounts.map((acc) => ( */}
+              {Array.isArray(accounts) && accounts.map((acc) => (
+                <div className="col-12 col-md-6 col-lg-4" key={acc._id}>
+
+                  <div className="card shadow-sm mb-3">
+
+                    <div className="card-body">
+
+                      <h6 className="text-muted">
+                        Account Number
+                      </h6>
+
+                      <h5>{acc.accountNumber}</h5>
+
+                      <p className="mt-2">
+                        Balance
+                      </p>
+
+                      <h4 className="text-success">
+                        ₦{Number(acc.balance).toLocaleString()}
+                      </h4>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              ))}
+
             </div>
-          ))}
-        </div>
 
-        {/* LOGOUT */}
-        <div className="mt-4 px-2">
-          <button
-            className="btn btn-outline-light w-100"
-            onClick={logout}
-          >
-            🚪 Logout
-          </button>
+          </div>
+
+          {/* TRANSFER */}
+
+          <div id="transfer" className="mb-5">
+
+            <div>
+              <TransferForm accountId={accounts[0]?._id} refresh={fetchUserAccounts} />
+            </div>
+
+          </div>
+
+          {/* DEPOSIT */}
+
+          <div className="mb-5">
+
+            <Deposit onSuccess={fetchUserAccounts} />
+
+          </div>
+
+          {/* WITHDRAW */}
+
+          <div className="mb-5">
+
+            <Withdraw onSuccess={fetchUserAccounts} />
+
+          </div>
+
+          {/* TRANSACTIONS */}
+
+          <h5>Transaction History</h5>
+          <table className="table table-responsive bg-white p-3 shadow-sm rounded" id="transactions">
+
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Account</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              {
+                Array.isArray(transactions) && transactions.map((t) => (
+                  <tr key={t._id}>
+
+                    <td>{t.type}</td>
+
+                    <td>₦{Number(t.amount).toLocaleString()}</td>
+
+                    <td>
+                      {t.type === "transfer"
+                        ? `To: ${t.targetAccountId?.accountNumber}`
+                        : t.accountId?.accountNumber || "-"}
+                    </td>
+
+                    <td>{new Date(t.createdAt).toLocaleString()}</td>
+
+                  </tr>
+
+                ))
+              }
+
+            </tbody>
+
+          </table>
+
           <Outlet />
-        </div>
+
+        </main>
 
       </div>
-    </nav>
+    </div>
+
   );
 }
-}
-// export default Sidebar;
+
