@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import API from "./api"
+import API from "@/api"
 
 const AdminLogin = () => {
   const navigate = useNavigate();

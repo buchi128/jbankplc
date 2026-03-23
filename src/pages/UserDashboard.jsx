@@ -4,9 +4,9 @@ import axios from "axios";
 import Deposit from "../components/transactions/DepositForm";
 import Withdraw from "../components/transactions/WithdrawForm";
 import TransferForm from "../components/transactions/TransferForm";
-import API from "./api"
+import API from "@/api"
 
-const API = API.create({
+const API = axios.create({
   baseURL: "/api",
   withCredentials: true
 });

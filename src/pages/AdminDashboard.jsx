@@ -3,9 +3,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import LogoutButton from './LogoutButton';
 import Transactions from '../components/transactions/TransactionList';
-import API from './api';
+import API from '@/api';
 
-const API = API.create({
+const API = axios.create({
   baseURL: '/api',
   withCredentials: true,
 });
