@@ -6,11 +6,11 @@ import Withdraw from "../components/transactions/WithdrawForm";
 import TransferForm from "../components/transactions/TransferForm";
 import API from "@/api"
 
-const API = axios.create({
+ axios.create({
   baseURL: "/api",
   withCredentials: true
 });
-
+//const API =
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) config.headers.Authorization = `Bearer ${token}`;
