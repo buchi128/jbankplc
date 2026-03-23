@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import.meta.env.VITE_SEED_SECRET
 import API from "@/api"
 
- axios.create({
-  baseURL: "/api",
-});
+//  axios.create({
+//   baseURL: "/api",
+// });
 //const API =
 export default function SeedAdminForm() {
   const navigate = useNavigate();

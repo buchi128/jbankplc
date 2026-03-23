@@ -1,26 +1,23 @@
 import { useState } from "react";
-import axios from "axios";
-import API  from "@/api"
+import API from "@/api";
 
 function Deposit() {
   const [amount, setAmount] = useState("");
 
   const handleDeposit = async () => {
-    try {
-      const token = localStorage.getItem("token");
+    if (!amount || Number(amount) <= 0) {
+      alert("Please enter a valid amount");
+      return;
+    }
 
-      await API.post(
-        "/api/transactions/deposit",
-        { amount: Number(amount) }, 
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+    try {
+      await API.post("/api/transactions/deposit", {
+        amount: Number(amount),
+      });
 
       alert("Deposit successful!");
       setAmount("");
+
     } catch (err) {
       console.error(err);
       alert(err.response?.data || "Deposit failed");

@@ -5,17 +5,10 @@ import LogoutButton from './LogoutButton';
 import Transactions from '../components/transactions/TransactionList';
 import API from '@/api';
 
- axios.create({
-  baseURL: '/api',
-  withCredentials: true,
-});
-
-API.interceptors.request.use(config => {
-  const token = localStorage.getItem('token');
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
-}, err => Promise.reject(err));
-
+//  axios.create({
+//   baseURL: '/api',
+//   withCredentials: true,
+// });
 export default function AdminDashboard() {
   const navigate = useNavigate();
 

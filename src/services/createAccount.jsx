@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import API from "@/api"
 
-const API = axios.create({ baseURL: '/api' });
+//const API = axios.create({ baseURL: '/api' });
 
 function CreateAccount() {
   const [userId, setUserId] = useState('');

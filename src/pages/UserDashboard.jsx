@@ -6,27 +6,6 @@ import Withdraw from "../components/transactions/WithdrawForm";
 import TransferForm from "../components/transactions/TransferForm";
 import API from "@/api"
 
- axios.create({
-  baseURL: "/api",
-  withCredentials: true
-});
-//const API =
-API.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
-});
-API.interceptors.response.use(
-  res => res,
-  err => {
-    if (err.response?.status === 401) {
-      localStorage.clear();
-      window.location.href = "/login";
-    }
-    return Promise.reject(err);
-  }
-);
-
 export default function UserDashboard() {
 
   const navigate = useNavigate();

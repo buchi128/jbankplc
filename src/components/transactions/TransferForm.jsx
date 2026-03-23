@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import API from "@/api";
 
 const TransferForm = ({ refresh }) => {
@@ -9,20 +8,18 @@ const TransferForm = ({ refresh }) => {
 
   const handleTransfer = async (e) => {
     e.preventDefault();
-
+    if (loading) return;
     if (!targetAccountNumber.trim()) {
       return alert("Enter recipient account number");
     }
 
     const amt = Number(amount);
-    if (!amt || amt <= 0) {
+
+    if (!amount || isNaN(amt) || amt <= 0) {
       return alert("Enter a valid amount greater than 0");
     }
-
     try {
       setLoading(true);
-
-      const token = localStorage.getItem("token");
 
       await API.post(
         "/api/transactions/transfer",
@@ -30,11 +27,7 @@ const TransferForm = ({ refresh }) => {
           amount: amt,
           targetAccountNumber: targetAccountNumber.trim(),
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+
       );
 
       alert("Transfer Successful");

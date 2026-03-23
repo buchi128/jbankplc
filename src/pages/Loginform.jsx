@@ -27,9 +27,7 @@ const Loginform = () => {
           "/api/auth/login",
           values
         );
-        console.log('login response', res);
-        console.log('res.data', res.data);
-
+        
         const { user, token } = res.data;
 
         if (!token || !user) {
