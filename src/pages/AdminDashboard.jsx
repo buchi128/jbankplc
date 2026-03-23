@@ -5,10 +5,6 @@ import LogoutButton from './LogoutButton';
 import Transactions from '../components/transactions/TransactionList';
 import API from '@/api';
 
-//  axios.create({
-//   baseURL: '/api',
-//   withCredentials: true,
-// });
 export default function AdminDashboard() {
   const navigate = useNavigate();
 

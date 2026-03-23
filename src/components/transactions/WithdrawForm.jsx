@@ -21,7 +21,7 @@ function Withdraw() {
         amount: amt,
       });
 
-      alert(`Withdrawal successful! New balance: #{res.data.balance}`);
+      alert(`Withdrawal successful! New balance: ${res.data.balance}`);
       setAmount("");
 
     } catch (error) {
