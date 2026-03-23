@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API from "../api";
 
 function Transactions() {
   const [transactions, setTransactions] = useState([]);
@@ -9,8 +10,8 @@ function Transactions() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await axios.get(
-          "http://localhost:5000/api/transactions/history",
+        const res = await API.get(
+          "/api/transactions/history",
           {
             headers: {
               Authorization: `Bearer ${token}`,

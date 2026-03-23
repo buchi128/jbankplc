@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import.meta.env.VITE_SEED_SECRET
+import API from "./api"
 
-const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+const API = API.create({
+  baseURL: "/api",
 });
 
 export default function SeedAdminForm() {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import API from "../api";
 
 const TransferForm = ({ refresh }) => {
   const [targetAccountNumber, setTargetAccountNumber] = useState("");
@@ -23,8 +24,8 @@ const TransferForm = ({ refresh }) => {
 
       const token = localStorage.getItem("token");
 
-      await axios.post(
-        "http://localhost:5000/api/transactions/transfer",
+      await API.post(
+        "/api/transactions/transfer",
         {
           amount: amt,
           targetAccountNumber: targetAccountNumber.trim(),

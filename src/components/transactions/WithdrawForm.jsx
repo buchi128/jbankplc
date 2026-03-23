@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import API from "../api";
 
 function Withdraw() {
   const [amount, setAmount] = useState("");
@@ -8,8 +9,8 @@ function Withdraw() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await axios.post(
-        "http://localhost:5000/api/transactions/withdraw",
+      const res = await API.post(
+        "/api/transactions/withdraw",
         { amount: Number(amount) },
         {
           headers: {

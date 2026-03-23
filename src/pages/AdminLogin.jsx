@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API from "./api"
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -27,8 +28,8 @@ const AdminLogin = () => {
 
     onSubmit: async (values) => {
       try {
-        const res = await axios.post(
-          "http://localhost:5000/api/auth/login",
+        const res = await API.post(
+          "/api/auth/login",
           values
         );
 

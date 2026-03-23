@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import API  from "../api"
 
 function Deposit() {
   const [amount, setAmount] = useState("");
@@ -8,8 +9,8 @@ function Deposit() {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.post(
-        "http://localhost:5000/api/transactions/deposit",
+      await API.post(
+        "/api/transactions/deposit",
         { amount: Number(amount) }, 
         {
           headers: {
