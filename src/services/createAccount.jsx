@@ -10,7 +10,7 @@ function CreateAccount() {
 
   const handleCreateAccount = async () => {
     try {
-      const { data } = await API.post('/api/register', { userId });
+      const { data } = await API.post('/api/auth/register', { userId });
       setMessage(`Account created: ${data.account.accountNumber}`);
     } catch (err) {
       setMessage(err.response?.data?.error || 'Error creating account');
