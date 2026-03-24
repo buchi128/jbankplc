@@ -38,7 +38,7 @@ export default function AdminDashboard() {
     setLoading(true);
     setError(null);
     try {
-      const res = await API.get('/admin/dashboard');
+      const res = await API.get('/api/admin/dashboard');
       const data = res.data?.data ?? res.data;
 
       setSummary({
