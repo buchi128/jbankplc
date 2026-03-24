@@ -29,7 +29,7 @@ export default function UserDashboard() {
         return;
       }
 
-      const res = await API.get("/accounts/me");
+      const res = await API.get("/api/accounts/me");
 
       console.log("API RESPONSE:", res.data);
 

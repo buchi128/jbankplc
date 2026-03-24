@@ -40,7 +40,7 @@ export default function SeedAdminForm() {
     setLoading(true);
 
     try {
-      const res = await API.post("/auth/seed-admin", {
+      const res = await API.post("/api/auth/seed-admin", {
         seed: form.seed,
         email: form.email,
         password: form.password,
