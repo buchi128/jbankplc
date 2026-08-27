@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://jbank-backend-lajm.onrender.com"
+  baseURL: "https://vercel.app"
 });
 API.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
