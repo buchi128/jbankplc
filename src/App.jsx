@@ -14,8 +14,16 @@ import About from "./components/About";
 import ImportantLinks from "./components/ImportantLinks";
 import Resources from "./components/Resources";
 import Transactions from "./components/transactions/TransactionList";
+ import {Outlet } from 'react-router-dom';
 
-const token = localStorage.getItem("token");
+ const token = localStorage.getItem("token");
+
+const ProtectedRoute = () => {
+  const activeToken = localStorage.getItem('token');
+  
+  return activeToken ? <Outlet /> : <Navigate to="/login" replace />;
+};
+
 
 function App() {
   return (
@@ -32,7 +40,9 @@ function App() {
         <Route path="/login" element={<Loginform />} />;
         <Route path="/logout" element={<LogoutButton />} />;
         <Route path="/admin/login" element={<AdminLogin />} />; {/* create this */}
-        <Route path="/dashboard" element={token ? <Dashboard /> : <Navigate to="/login" />} />;
+        <Route element={<ProtectedRoute />}>
+         <Route path="/dashboard" element={<Dashboard />} />
+         </Route>;
         <Route path="/admin/dashboard" element={token ? <AdminDashboard /> : <Navigate to="/admin/login" />} />;
         <Route path="*" element={<PageNotFound />} />;
       </Routes>
