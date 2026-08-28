@@ -15,7 +15,7 @@ export default function UserDashboard() {
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState(null);
 
-  const fetchUserAccounts = useCallback(async () => {
+   const fetchUserAccounts = useCallback(async () => {
     setLoading(true);
     setError(null);
 
@@ -26,19 +26,21 @@ export default function UserDashboard() {
         return;
       }
 
-      
-      const res = await API.get("/accounts/me");
-      console.log("DASHBOARD LIVE RECOVERY RESPONSE:", res.data);
-
-      const accountData = res.data?.data || null;
+      const accountRes = await API.get("/accounts/me");
+      const accountData = accountRes.data?.data || null;
 
       if (accountData) {
         setAccount(accountData);
-
-        setTransactions(Array.isArray(accountData.transactions) ? accountData.transactions : []);
       } else {
         setAccount(null);
       }
+
+      const historyRes = await API.get("/transactions/history");
+      console.log("USER DASHBOARD HISTORY POPULATE:", historyRes.data);
+      
+      const ledgerArray = historyRes.data?.data || historyRes.data || [];
+      setTransactions(Array.isArray(ledgerArray) ? ledgerArray : []);
+
     } catch (err) {
       console.error("Dashboard hydration critical failure:", err.response?.data || err.message);
       setError("Failed to load dashboard metrics");
