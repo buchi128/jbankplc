@@ -21,7 +21,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Issue account form state
+  
   const [form, setForm] = useState({
     userId: '',
     email: '',
@@ -33,7 +33,7 @@ export default function AdminDashboard() {
   const [issuing, setIssuing] = useState(false);
   const [issueMessage, setIssueMessage] = useState(null);
 
-  // Fetch dashboard data
+  
   const fetchDashboard = async () => {
     setLoading(true);
     setError(null);
@@ -72,18 +72,18 @@ export default function AdminDashboard() {
    return () => { mounted = false; };
   }, [navigate]);
 
-  // Handle form input changes
+  
   const handleChange = e => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
-  // Issue bank account handler
+  
   const handleIssueAccount = async e => {
     e.preventDefault();
     setIssueMessage(null);
 
-    // Basic validation: require userId or email
+    
     if (!form.userId.trim() && !form.email.trim()) {
       setIssueMessage({ type: 'error', text: 'Provide either userId or email' });
       return;
@@ -100,7 +100,7 @@ export default function AdminDashboard() {
 
     setIssuing(true);
     try {
-      const res = await API.post('/register', payload);
+      const res = await API.post('/admin/issue-bank-account', payload);
       const message = res?.data?.message || 'Bank account issued';
 
       setIssueMessage({ type: 'success', text: message });
