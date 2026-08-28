@@ -57,7 +57,7 @@ function Withdraw({ onSuccess }) {
 
   return (
     <div className="card p-3 shadow-sm border-0">
-      <h5 className="mb-3 small text-uppercase text-muted">Withdraw Funds Asset</h5>
+      <h5 className="mb-3 small text-uppercase text-muted"></h5>
       <div className="d-flex gap-2">
         <input
           type="number"
